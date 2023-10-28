@@ -12,31 +12,23 @@ class StudentRepositoryTest {
 
     @Autowired
     private StudentRepository underTest;
-
     @AfterEach
-    void tearDown(){
+    void tearDown() {
         underTest.deleteAll();
     }
-
     @Test
     void itShouldCheckIfStudentExistEmail() {
-
-        String email = "kajto@gmail.com";
-        Student student = new Student("Kajto", email, Gender.MALE);
+        String email = "john@gmail.com";
+        Student student = new Student("John", email, Gender.MALE);
         underTest.save(student);
-
         boolean exists = underTest.selectExistsEmail(email);
-
         assertThat(exists).isTrue();
     }
 
     @Test
     void itShouldCheckIfStudentNotExistEmail() {
-
-        String email = "kajto@gmail.com";
-
+        String email = "john@gmail.com";
         boolean exists = underTest.selectExistsEmail(email);
-
         assertThat(exists).isFalse();
     }
 }
